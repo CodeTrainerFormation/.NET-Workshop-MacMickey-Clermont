@@ -1,11 +1,12 @@
 ﻿using BusinessLayer;
 using DomainModel;
+using System.Diagnostics;
 
 namespace MacConsole
 {
     internal class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             var products = new List<Product>()
             {
@@ -40,6 +41,8 @@ namespace MacConsole
 
             if(output.ToLower() == "oui")
             {
+                Log("ajout d'une facture");
+
                 Console.WriteLine("Format du fichier de facture (tapez uniquement le numéro) : ");
                 Console.WriteLine("1 - text");
                 Console.WriteLine("2 - json");
@@ -52,12 +55,15 @@ namespace MacConsole
                     switch (choice)
                     {
                         case "1":
+                            Log("impression en texte");
                             FileHelper.PrintBill(products, FileExtension.TXT);
                             break;
                         case "2":
+                            Log("impression en json");
                             FileHelper.PrintBill(products, FileExtension.JSON);
                             break;
                         case "3":
+                            Log("impression en xml");
                             FileHelper.PrintBill(products, FileExtension.XML);
                             break;
                         default:
@@ -67,6 +73,7 @@ namespace MacConsole
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
+                    Log($"exception : {ex?.InnerException.Message}");
                 }
 
             }
@@ -74,6 +81,9 @@ namespace MacConsole
             Console.WriteLine("Hello, World!");
         }
 
-
+        public static void Log(string message)
+        {
+            Debug.WriteLine($"DEBUG : {message}");
+        }
     }
 }

@@ -55,16 +55,6 @@ namespace BusinessLayer
                 if (fs != null)
                     fs.Close();
             }
-
-            try
-            {
-
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
         }
 
         private static void PrintJson(List<Product> products, StreamWriter sw)
