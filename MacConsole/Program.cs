@@ -47,19 +47,26 @@ namespace MacConsole
 
                 string choice = Console.ReadLine();
 
-                switch (choice)
+                try
                 {
-                    case "1":
-                        FileHelper.PrintBill(products, FileExtension.TXT);
-                        break;
-                    case "2":
-                        FileHelper.PrintBill(products, FileExtension.JSON);
-                        break;
-                    case "3":
-                        FileHelper.PrintBill(products, FileExtension.XML);
-                        break;
-                    default:
-                        throw new NotSupportedException();
+                    switch (choice)
+                    {
+                        case "1":
+                            FileHelper.PrintBill(products, FileExtension.TXT);
+                            break;
+                        case "2":
+                            FileHelper.PrintBill(products, FileExtension.JSON);
+                            break;
+                        case "3":
+                            FileHelper.PrintBill(products, FileExtension.XML);
+                            break;
+                        default:
+                            throw new NotSupportedException();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
                 }
 
             }

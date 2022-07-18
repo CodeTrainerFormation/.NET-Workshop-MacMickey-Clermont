@@ -39,11 +39,13 @@ namespace BusinessLayer
             }
             catch (NotImplementedException ex)
             {
-                Console.WriteLine("Ce format n'est pas encore supporté");
+                //Log.LogError(ex);
+                throw new Exception("Ce format n'est pas encore supporté", ex); 
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Une erreur est survenue avec l'écriture du fichier");
+                //Log.LogError(ex);
+                throw new Exception("Une erreur est survenue avec l'écriture du fichier", ex);
             }
             finally
             {
@@ -52,6 +54,16 @@ namespace BusinessLayer
 
                 if (fs != null)
                     fs.Close();
+            }
+
+            try
+            {
+
+            }
+            catch (Exception)
+            {
+
+                throw;
             }
         }
 
