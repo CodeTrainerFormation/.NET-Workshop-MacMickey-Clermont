@@ -1,17 +1,9 @@
-﻿using DomainModel;
+﻿using BusinessLayer;
+using DomainModel;
 using Newtonsoft.Json;
 
 namespace MacConsole
 {
-    // TODO : enum outputfile (text, json, xml)
-
-    public enum FileExtension
-    {
-        TXT = 1,
-        JSON,
-        XML,
-    };
-
     internal class Program
     {
         static void Main(string[] args)
@@ -59,13 +51,13 @@ namespace MacConsole
                 switch (choice)
                 {
                     case "1":
-                        PrintBill(products, FileExtension.TXT);
+                        FileHelper.PrintBill(products, FileExtension.TXT);
                         break;
                     case "2":
-                        PrintBill(products, FileExtension.JSON);
+                        FileHelper.PrintBill(products, FileExtension.JSON);
                         break;
                     case "3":
-                        PrintBill(products, FileExtension.XML);
+                        FileHelper.PrintBill(products, FileExtension.XML);
                         break;
                     default:
                         throw new NotSupportedException();
@@ -76,68 +68,6 @@ namespace MacConsole
             Console.WriteLine("Hello, World!");
         }
 
-        private static void PrintBill(List<Product> products, FileExtension fileExtension)
-        {
-            FileStream? fs = null;
-            StreamWriter? sw = null;
 
-            try
-            {
-                string filetime = DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");
-
-                fs = new FileStream($"bill_{filetime}.{fileExtension.ToString().ToLower()}", FileMode.CreateNew, FileAccess.Write);
-                sw = new StreamWriter(fs);
-
-                switch (fileExtension)
-                {
-                    case FileExtension.TXT:
-                        PrintText(products, sw);
-                        break;
-
-                    case FileExtension.JSON:
-                        PrintJson(products, sw);
-                        break;
-
-                    case FileExtension.XML:
-                        throw new NotImplementedException();
-                        break;
-
-                    default:
-                        break;
-                }
-
-                
-            }
-            catch (Exception ex)
-            {
-                // TODO : changer l'exception par un message
-                Console.WriteLine(ex.ToString());
-            }
-            finally
-            {
-                if (sw != null)
-                    sw.Close();
-
-                if (fs != null)
-                    fs.Close();
-            }
-        }
-
-        private static void PrintJson(List<Product> products, StreamWriter sw)
-        {
-            string serializedProducts = JsonConvert.SerializeObject(products);
-
-            sw.Write(serializedProducts);
-        }
-
-        private static void PrintText(List<Product> products, StreamWriter sw)
-        {
-            sw.WriteLine($"Facture client {Environment.NewLine}");
-
-            foreach (Product product in products)
-            {
-                sw.WriteLine($"{product.Name} - {product.Price} €");
-            }
-        }
     }
 }
