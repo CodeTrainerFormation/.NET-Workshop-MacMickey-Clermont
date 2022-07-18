@@ -1,6 +1,5 @@
 ﻿using BusinessLayer;
 using DomainModel;
-using Newtonsoft.Json;
 
 namespace MacConsole
 {
