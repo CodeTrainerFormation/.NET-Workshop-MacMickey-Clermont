@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32616.157
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomainModel", "DomainModel\DomainModel.csproj", "{3A039312-C266-4A07-A910-04EDA591460D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MacConsole", "MacConsole\MacConsole.csproj", "{F9509A74-94E8-4A60-B14E-81D3D81EB98A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3A039312-C266-4A07-A910-04EDA591460D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A039312-C266-4A07-A910-04EDA591460D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A039312-C266-4A07-A910-04EDA591460D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A039312-C266-4A07-A910-04EDA591460D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9509A74-94E8-4A60-B14E-81D3D81EB98A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9509A74-94E8-4A60-B14E-81D3D81EB98A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9509A74-94E8-4A60-B14E-81D3D81EB98A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9509A74-94E8-4A60-B14E-81D3D81EB98A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CBA0FC78-4B57-4746-9B7F-09977FC4776A}
+	EndGlobalSection
+EndGlobal
