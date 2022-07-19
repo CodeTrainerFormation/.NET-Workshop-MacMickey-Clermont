@@ -5,7 +5,7 @@ using System.Diagnostics;
 namespace MacConsole
 {
     // type de delegate = type de pointeur de fonction(s)
-    // précisement une fonction qui a comme paramètre une chaine et ne renvoit rien)
+    // précisement une fonction qui a comme paramètre une chaine et ne renvoit rien
     public delegate void MyLoggerDelegate(string text);
 
     internal class Program
@@ -27,14 +27,46 @@ namespace MacConsole
             //  delegate = pointeur de fonction(s)
             MyLoggerDelegate myLoggerDelegate = null;
 
+
+            Console.WriteLine("Lambda method (simple line) ?");
+            if ("oui" == Console.ReadLine())
+            {
+                myLoggerDelegate += text => Console.WriteLine($"LAMBDA in white : {text}");
+            }
+
+
+            Console.WriteLine("Lambda method ?");
+            if ("oui" == Console.ReadLine())
+            {
+                myLoggerDelegate += text =>
+                {
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine($"LAMBDA : {text}");
+                    Console.ForegroundColor = ConsoleColor.White;
+                };
+            }
+
+
+            Console.WriteLine("Anonymous method ?");
+            if ("oui" == Console.ReadLine())
+            {
+                myLoggerDelegate += delegate (string text)
+                {
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine($"ANONYMOUS : {text}");
+                    Console.ForegroundColor = ConsoleColor.White;
+                };
+            }
+
+
             Console.WriteLine("Debug ?");
             if("oui" == Console.ReadLine())
                 myLoggerDelegate += Log;
 
+
             Console.WriteLine("Console ?");
             if ("oui" == Console.ReadLine())
                 myLoggerDelegate += LogConsole;
-
 
 
             var products = new List<Product>()
