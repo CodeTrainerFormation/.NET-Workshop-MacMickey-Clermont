@@ -10,6 +10,10 @@ namespace MacConsole
 
     internal class Program
     {
+        //  delegate = pointeur de fonction(s)
+        // private static MyLoggerDelegate myLoggerDelegate = null;
+        private static Action<string> myLoggerDelegate = null;
+
         public static void Log(string message)
         {
             Debug.WriteLine($"DEBUG : {message}");
@@ -25,88 +29,45 @@ namespace MacConsole
         public static void Main(string[] args)
         {
             // TODO : Refactoriser le main
-            // TODO : faire un CUD (Create Update Delete) sur une liste de produits (couche business) 
+            // TODO : faire un CUD (Create Update Delete) sur une
+            //        liste de produits (couche business) 
             // TODO : faire des requêtes avec Linq pour récuperer : 
             //        - un produit à partir de son id
             //        - un seul produit à partir de son nom
             //        - la totalité des produits
             //        - les produits qui ont un prix inférieur à ...
-            //        - les produits qui ont un prix inférieur à ... et un nom qui commence par ...
-            // TODO : modifier l'interface pour qu'elles permettent de requêter les méthodes de la couche métier
+            //        - les produits qui ont un prix inférieur à ...
+            //          et un nom qui contiennent la lettre ...
+            // TODO : modifier l'interface pour qu'elles permettent de requêter
+            //        les méthodes de la couche métier
 
-
-
-
-            //  delegate = pointeur de fonction(s)
-            //MyLoggerDelegate myLoggerDelegate = null;
-            Action<string> myLoggerDelegate = null;
-
-            Console.WriteLine("Lambda method (simple line) ?");
-            if ("oui" == Console.ReadLine())
-            {
-                myLoggerDelegate += text => Console.WriteLine($"LAMBDA in white : {text}");
-            }
-
-
-            Console.WriteLine("Lambda method ?");
-            if ("oui" == Console.ReadLine())
-            {
-                myLoggerDelegate += text =>
-                {
-                    Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine($"LAMBDA : {text}");
-                    Console.ForegroundColor = ConsoleColor.White;
-                };
-            }
-
-
-            Console.WriteLine("Anonymous method ?");
-            if ("oui" == Console.ReadLine())
-            {
-                myLoggerDelegate += delegate (string text)
-                {
-                    Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine($"ANONYMOUS : {text}");
-                    Console.ForegroundColor = ConsoleColor.White;
-                };
-            }
-
-
-            Console.WriteLine("Debug ?");
-            if("oui" == Console.ReadLine())
-                myLoggerDelegate += Log;
-
-
-            Console.WriteLine("Console ?");
-            if ("oui" == Console.ReadLine())
-                myLoggerDelegate += LogConsole;
-
+            SubscriptionsAnonymousMethods();
+            SubscriptionsWithMethods();
 
             var products = new List<Product>()
             {
-                new Product()
-                {
-                    Name = "Big Mick'",
-                    Description = "Le seul, l'unique Big Mick' de chez Mac Mickey ! Ses deux steaks hachés, son cheddar fondu, ses oignons, ses cornichons, son lit de salade et sa sauce inimitable, font du Big Mick' un sandwich culte et indémodable.",
-                    Price = 4.00M,
-                    Stockpiled = 50,
-                },
-                new Product()
-                {
-                    Name = "Royal O'Duck",
-                    Description = "Fondez pour son canard pané croustillant et sa sauce légèrement vinaigrée aux oignons et aux câpres, le tout dans un pain cuit vapeur. Laissez-vous prendre dans ses filets !",
-                    Price = 3.90M,
-                    Stockpiled = 30,
-                },
-                new Product()
-                {
-                    Name = "Duck Wings",
-                    Description = "Craquez pour ces ailes croustillantes, à savourer avec ou sans sauce, en famille ou entre amis, faîtes-vous plaisir !",
-                    Price = 4.30M,
-                    Stockpiled = 100,
-                }
+                //new Product()
+                //{
+                //    Name = "Big Mick'",
+                //    Description = "Le seul, l'unique Big Mick' de chez Mac Mickey ! Ses deux steaks hachés, son cheddar fondu, ses oignons, ses cornichons, son lit de salade et sa sauce inimitable, font du Big Mick' un sandwich culte et indémodable.",
+                //    Price = 4.00M,
+                //    Stockpiled = 50,
+                //},
+                //new Product()
+                //{
+                //    Name = "Royal O'Duck",
+                //    Description = "Fondez pour son canard pané croustillant et sa sauce légèrement vinaigrée aux oignons et aux câpres, le tout dans un pain cuit vapeur. Laissez-vous prendre dans ses filets !",
+                //    Price = 3.90M,
+                //    Stockpiled = 30,
+                //},
+                //new Product()
+                //{
+                //    Name = "Duck Wings",
+                //    Description = "Craquez pour ces ailes croustillantes, à savourer avec ou sans sauce, en famille ou entre amis, faîtes-vous plaisir !",
+                //    Price = 4.30M,
+                //    Stockpiled = 100,
+                //}
             };
-
 
             Console.WriteLine($"--- produits ajoutés ---{Environment.NewLine}");
 
@@ -114,9 +75,9 @@ namespace MacConsole
 
             string output = Console.ReadLine();
 
-            if(output.ToLower() == "oui")
+            if (output.ToLower() == "oui")
             {
-                if(myLoggerDelegate != null)
+                if (myLoggerDelegate != null)
                     myLoggerDelegate("ajout d'une facture");
 
                 Console.WriteLine("Format du fichier de facture (tapez uniquement le numéro) : ");
@@ -161,6 +122,51 @@ namespace MacConsole
             }
 
             Console.WriteLine("Hello, World!");
+        }
+
+        private static void SubscriptionsWithMethods()
+        {
+            Console.WriteLine("Debug ?");
+            if ("oui" == Console.ReadLine())
+                myLoggerDelegate += Log;
+
+
+            Console.WriteLine("Console ?");
+            if ("oui" == Console.ReadLine())
+                myLoggerDelegate += LogConsole;
+        }
+
+        private static void SubscriptionsAnonymousMethods()
+        {
+            Console.WriteLine("Lambda method (simple line) ?");
+            if ("oui" == Console.ReadLine())
+            {
+                myLoggerDelegate += text => Console.WriteLine($"LAMBDA in white : {text}");
+            }
+
+
+            Console.WriteLine("Lambda method ?");
+            if ("oui" == Console.ReadLine())
+            {
+                myLoggerDelegate += text =>
+                {
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine($"LAMBDA : {text}");
+                    Console.ForegroundColor = ConsoleColor.White;
+                };
+            }
+
+
+            Console.WriteLine("Anonymous method ?");
+            if ("oui" == Console.ReadLine())
+            {
+                myLoggerDelegate += delegate (string text)
+                {
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine($"ANONYMOUS : {text}");
+                    Console.ForegroundColor = ConsoleColor.White;
+                };
+            }
         }
     }
 }
