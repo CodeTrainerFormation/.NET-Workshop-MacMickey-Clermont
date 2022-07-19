@@ -4,10 +4,39 @@ using System.Diagnostics;
 
 namespace MacConsole
 {
+    // type de delegate = type de pointeur de fonction(s)
+    // précisement une fonction qui a comme paramètre une chaine et ne renvoit rien)
+    public delegate void MyLoggerDelegate(string text);
+
     internal class Program
     {
+        public static void Log(string message)
+        {
+            Debug.WriteLine($"DEBUG : {message}");
+        }
+
+        public static void LogConsole(string myMessage)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine($"CONSOLE : {myMessage}");
+            Console.ForegroundColor = ConsoleColor.White;
+        }
+
         public static void Main(string[] args)
         {
+            //  delegate = pointeur de fonction(s)
+            MyLoggerDelegate myLoggerDelegate = null;
+
+            Console.WriteLine("Debug ?");
+            if("oui" == Console.ReadLine())
+                myLoggerDelegate += Log;
+
+            Console.WriteLine("Console ?");
+            if ("oui" == Console.ReadLine())
+                myLoggerDelegate += LogConsole;
+
+
+
             var products = new List<Product>()
             {
                 new Product()
@@ -41,7 +70,8 @@ namespace MacConsole
 
             if(output.ToLower() == "oui")
             {
-                Log("ajout d'une facture");
+                if(myLoggerDelegate != null)
+                    myLoggerDelegate("ajout d'une facture");
 
                 Console.WriteLine("Format du fichier de facture (tapez uniquement le numéro) : ");
                 Console.WriteLine("1 - text");
@@ -55,15 +85,21 @@ namespace MacConsole
                     switch (choice)
                     {
                         case "1":
-                            Log("impression en texte");
+                            if (myLoggerDelegate != null)
+                                myLoggerDelegate("impression en texte");
+
                             FileHelper.PrintBill(products, FileExtension.TXT);
                             break;
                         case "2":
-                            Log("impression en json");
+                            if (myLoggerDelegate != null)
+                                myLoggerDelegate("impression en json");
+
                             FileHelper.PrintBill(products, FileExtension.JSON);
                             break;
                         case "3":
-                            Log("impression en xml");
+                            if (myLoggerDelegate != null)
+                                myLoggerDelegate("impression en xml");
+
                             FileHelper.PrintBill(products, FileExtension.XML);
                             break;
                         default:
@@ -73,17 +109,12 @@ namespace MacConsole
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
-                    Log($"exception : {ex?.InnerException.Message}");
+                    myLoggerDelegate($"exception : {ex?.InnerException.Message}");
                 }
 
             }
 
             Console.WriteLine("Hello, World!");
-        }
-
-        public static void Log(string message)
-        {
-            Debug.WriteLine($"DEBUG : {message}");
         }
     }
 }
