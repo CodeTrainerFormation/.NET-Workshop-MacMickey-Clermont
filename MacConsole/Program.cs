@@ -6,7 +6,7 @@ namespace MacConsole
 {
     // type de delegate = type de pointeur de fonction(s)
     // précisement une fonction qui a comme paramètre une chaine et ne renvoit rien
-    public delegate void MyLoggerDelegate(string text);
+    //public delegate void MyLoggerDelegate(string text);
 
     internal class Program
     {
@@ -24,9 +24,22 @@ namespace MacConsole
 
         public static void Main(string[] args)
         {
-            //  delegate = pointeur de fonction(s)
-            MyLoggerDelegate myLoggerDelegate = null;
+            // TODO : Refactoriser le main
+            // TODO : faire un CUD (Create Update Delete) sur une liste de produits (couche business) 
+            // TODO : faire des requêtes avec Linq pour récuperer : 
+            //        - un produit à partir de son id
+            //        - un seul produit à partir de son nom
+            //        - la totalité des produits
+            //        - les produits qui ont un prix inférieur à ...
+            //        - les produits qui ont un prix inférieur à ... et un nom qui commence par ...
+            // TODO : modifier l'interface pour qu'elles permettent de requêter les méthodes de la couche métier
 
+
+
+
+            //  delegate = pointeur de fonction(s)
+            //MyLoggerDelegate myLoggerDelegate = null;
+            Action<string> myLoggerDelegate = null;
 
             Console.WriteLine("Lambda method (simple line) ?");
             if ("oui" == Console.ReadLine())
@@ -93,6 +106,7 @@ namespace MacConsole
                     Stockpiled = 100,
                 }
             };
+
 
             Console.WriteLine($"--- produits ajoutés ---{Environment.NewLine}");
 
