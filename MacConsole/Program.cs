@@ -28,13 +28,24 @@ namespace MacConsole
 
         public static void Main(string[] args)
         {
-            // TODO : modifier l'interface pour qu'elles permettent de requêter
-            //        les méthodes de la couche métier
+            // TODO : UI en console pour ajouter/modifier/supprimer,
+            //        relancer une nouvelle commande et
+            //        créer la facture à chaque fin de commande
+            // TODO : modifier la facture pour avoir une numérotation de la facture
+            //        et un horodatage affiché dans la facture
+            // (TODO) : Déplacer Action dans la partie métier et faire des logs
+            //          dans la partie métier
 
             //SubscriptionsAnonymousMethods();
             //SubscriptionsWithMethods();
 
             ProductOrder order = new ProductOrder();
+
+            ProductOrder order1 = new ProductOrder();
+
+            ProductOrder order2 = new ProductOrder();
+
+
 
             Product p = new Product()
             {
@@ -127,19 +138,19 @@ namespace MacConsole
                             if (myLoggerDelegate != null)
                                 myLoggerDelegate("impression en texte");
 
-                            FileHelper.PrintBill(order.GetProducts(), FileExtension.TXT);
+                            FileHelper.PrintBill(order, FileExtension.TXT);
                             break;
                         case "2":
                             if (myLoggerDelegate != null)
                                 myLoggerDelegate("impression en json");
 
-                            FileHelper.PrintBill(order.GetProducts(), FileExtension.JSON);
+                            FileHelper.PrintBill(order, FileExtension.JSON);
                             break;
                         case "3":
                             if (myLoggerDelegate != null)
                                 myLoggerDelegate("impression en xml");
 
-                            FileHelper.PrintBill(order.GetProducts(), FileExtension.XML);
+                            FileHelper.PrintBill(order, FileExtension.XML);
                             break;
                         default:
                             throw new NotSupportedException();

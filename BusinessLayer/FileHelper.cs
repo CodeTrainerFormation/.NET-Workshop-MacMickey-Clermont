@@ -5,7 +5,7 @@ namespace BusinessLayer
 {
     public class FileHelper
     {
-        public static void PrintBill(List<Product> products, FileExtension fileExtension)
+        public static void PrintBill(ProductOrder order, FileExtension fileExtension)
         {
             FileStream? fs = null;
             StreamWriter? sw = null;
@@ -20,11 +20,11 @@ namespace BusinessLayer
                 switch (fileExtension)
                 {
                     case FileExtension.TXT:
-                        PrintText(products, sw);
+                        PrintText(order.OrderId, order.GetProducts(), sw);
                         break;
 
                     case FileExtension.JSON:
-                        PrintJson(products, sw);
+                        PrintJson(order.GetProducts(), sw);
                         break;
 
                     case FileExtension.XML:
@@ -64,9 +64,11 @@ namespace BusinessLayer
             sw.Write(serializedProducts);
         }
 
-        private static void PrintText(List<Product> products, StreamWriter sw)
+        private static void PrintText(int orderId, List<Product> products, StreamWriter sw)
         {
-            sw.WriteLine($"Facture client {Environment.NewLine}");
+            sw.WriteLine($"Facture client numéro {orderId}, daté du ");
+
+            sw.WriteLine($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")} { Environment.NewLine}");
 
             foreach (Product product in products)
             {

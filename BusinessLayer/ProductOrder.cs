@@ -10,12 +10,16 @@ namespace BusinessLayer
     public class ProductOrder
     {
         private List<Product> products;
-        private int counter;
+        private int counterOfProducts;
+        private static int counterOfOrders = 0;
+
+        public int OrderId { get; private set; }
 
         public ProductOrder()
         {
             this.products = new List<Product>();
-            this.counter = 0;
+            this.counterOfProducts = 0;
+            this.OrderId = ++ProductOrder.counterOfOrders;
         }
 
         //public ProductOrder(List<Product> products)
@@ -26,7 +30,7 @@ namespace BusinessLayer
         // --- Create ---
         public void AddProduct(Product product)
         {
-            product.Id = ++counter;
+            product.Id = ++counterOfProducts;
             this.products.Add(product);
         }
 
