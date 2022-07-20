@@ -11,6 +11,7 @@ namespace BusinessLayer
     {
         private List<Product> products;
         private int counterOfProducts;
+        public Action<string> OrderDelegate = null;
         private static int counterOfOrders = 0;
 
         public int OrderId { get; private set; }
@@ -32,6 +33,9 @@ namespace BusinessLayer
         {
             product.Id = ++counterOfProducts;
             this.products.Add(product);
+
+            if (OrderDelegate != null)
+                OrderDelegate($"Produit ajouté à la commande numéro {OrderId}");
         }
 
         public void CreateProduct(string name, decimal price, string description, int stockpiled)
@@ -76,6 +80,9 @@ namespace BusinessLayer
             p.Price = product.Price;
             p.Description = product.Description;
             p.Stockpiled = product.Stockpiled;
+
+            if (OrderDelegate != null)
+                OrderDelegate($"Produit numéro {product.Id} modifié à la commande numéro {OrderId}");
         }
 
         public void UpdateProduct(int id, string name, decimal price, string description, int stockpiled)
@@ -103,6 +110,9 @@ namespace BusinessLayer
         public void DeleteProduct(Product product)
         {
             this.products.Remove(product);
+
+            if (OrderDelegate != null)
+                OrderDelegate($"Produit numéro {product.Id} supprimé à la commande numéro {OrderId}");
         }
 
         public void DeleteProduct(int id)
@@ -114,6 +124,9 @@ namespace BusinessLayer
         public void DeleteProductRemoveAll(int id)
         {
             this.products.RemoveAll(products => products.Id == id);
+
+            if (OrderDelegate != null)
+                OrderDelegate($"Produit numéro {id} supprimé à la commande numéro {OrderId}");
         }
 
         // Queries

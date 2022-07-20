@@ -28,11 +28,6 @@ namespace MacConsole
 
         public static void Main(string[] args)
         {
-            // TODO : UI en console pour ajouter/modifier/supprimer,
-            //        relancer une nouvelle commande et
-            //        créer la facture à chaque fin de commande
-            // TODO : modifier la facture pour avoir une numérotation de la facture
-            //        et un horodatage affiché dans la facture
             // (TODO) : Déplacer Action dans la partie métier et faire des logs
             //          dans la partie métier
 
@@ -40,10 +35,11 @@ namespace MacConsole
             //SubscriptionsWithMethods();
 
             ProductOrder order = new ProductOrder();
+            order.OrderDelegate += str => Debug.WriteLine(str);
 
-            ProductOrder order1 = new ProductOrder();
+            //ProductOrder order1 = new ProductOrder();
 
-            ProductOrder order2 = new ProductOrder();
+            //ProductOrder order2 = new ProductOrder();
 
 
 
