@@ -111,5 +111,31 @@ namespace BusinessLayer
         {
             this.products.RemoveAll(products => products.Id == id);
         }
+
+        // Queries
+        public Product? GetProductById(int id)
+        {
+            return this.products.SingleOrDefault(p => p.Id == id);
+        }
+
+        public Product? GetProductByName(string name)
+        {
+            return this.products.FirstOrDefault(p => p.Name == name);
+        }
+
+        public List<Product> GetProducts()
+        {
+            return products;
+        }
+
+        public List<Product> GetProductsWithPriceInferiorAt(decimal price)
+        {
+            return this.products.Where(p => p.Price < price).ToList();
+        }
+
+        public List<Product> GetProductsWithPriceInferiorAtAndNameStartBy(decimal price, char character)
+        {
+            return this.products.Where(p => p.Price < price && p.Name.StartsWith(character)).ToList();
+        }
     }
 }
