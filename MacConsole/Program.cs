@@ -28,16 +28,6 @@ namespace MacConsole
 
         public static void Main(string[] args)
         {
-            // TODO : Refactoriser le main
-            // TODO : faire un CUD (Create Update Delete) sur une
-            //        liste de produits (couche business) 
-            // TODO : faire des requêtes avec Linq pour récuperer : 
-            //        - un produit à partir de son id
-            //        - un seul produit à partir de son nom
-            //        - la totalité des produits
-            //        - les produits qui ont un prix inférieur à ...
-            //        - les produits qui ont un prix inférieur à ...
-            //          et un nom qui contiennent la lettre ...
             // TODO : modifier l'interface pour qu'elles permettent de requêter
             //        les méthodes de la couche métier
 
@@ -71,13 +61,43 @@ namespace MacConsole
                 Stockpiled = 100,
             });
 
+            order.CreateProduct("720", 8.70M, "720 grammes de pur plaisir", 20);
+
+            //Product p3 = order.GetProductByName("Big Mick'");
+
+            //List<Product> products = order.GetProductsWithPriceInferiorAtAndNameStartBy(5M, 'B');
+
+            //foreach (var product in products)
+            //{
+            //    Console.WriteLine($"{product.Name} - {product.Price}");
+            //}
 
 
+            //Product? p1 = order.GetProductById(1);
+
+            //if(p1 != null)
+            //{
+            //    p1.Price = 8.80M;
+            //    p1.Name = $"New {p1.Name}";
+            //}
+
+            //order.UpdateProduct(p1);
 
 
+            //order.UpdateProduct(2, "Royal O'Duck", 4.99M, "Fondez pour son canard pané croustillant et sa sauce légèrement vinaigrée aux oignons et aux câpres, le tout dans un pain cuit vapeur. Laissez-vous prendre dans ses filets !", 30);
 
 
+            //order.DeleteProduct(p1);
 
+            //order.DeleteProduct(2);
+
+            //order.DeleteProductRemoveAll(3);
+
+
+            //foreach (var product in order.GetProducts())
+            //{
+            //    Console.WriteLine($"{product.Name} - {product.Price}");
+            //}
 
 
 
